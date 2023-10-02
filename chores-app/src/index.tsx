@@ -4,6 +4,20 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAVUbe_6Qt5FLXp5Q8leXi9OYAeVv0BoVU",
+  authDomain: "chores-app-a1ca8.firebaseapp.com",
+  projectId: "chores-app-a1ca8",
+  storageBucket: "chores-app-a1ca8.appspot.com",
+  messagingSenderId: "860916980116",
+  appId: "1:860916980116:web:00a8cce2394f7269151781"
+};
+
+initializeApp(firebaseConfig);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
