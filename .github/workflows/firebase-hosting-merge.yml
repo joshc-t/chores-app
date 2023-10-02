@@ -15,7 +15,7 @@ jobs:
         working-directory: ./chores-app
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          entrypoint: /chores-app
+          entrypoint: ./chores-app
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHORES_APP_A1CA8 }}'
           channelId: live
