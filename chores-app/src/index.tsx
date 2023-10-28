@@ -1,10 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import reportWebVitals from "./reportWebVitals";
 import { initializeApp } from "firebase/app";
+import { BrowserRouter } from "react-router-dom";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -14,18 +15,20 @@ const firebaseConfig = {
   projectId: "chores-app-a1ca8",
   storageBucket: "chores-app-a1ca8.appspot.com",
   messagingSenderId: "860916980116",
-  appId: "1:860916980116:web:00a8cce2394f7269151781"
+  appId: "1:860916980116:web:00a8cce2394f7269151781",
 };
 
 initializeApp(firebaseConfig);
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
 );
 
 // If you want your app to work offline and load faster, you can change
