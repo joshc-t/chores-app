@@ -3,4 +3,5 @@ export type Chore = {
   name: string;
   dueDate: string;
   createdAt: string;
+  completed: boolean;
 };

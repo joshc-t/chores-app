@@ -1,9 +1,11 @@
 import "./AddChore.css";
-import { Card } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useChores } from "./realtimeDatabase/useRealtimeArray";
 import Loading from "./common/Loading";
-import { useMemo } from "react";
+import { ChangeEvent, useMemo } from "react";
+import { updateChore } from "./realtimeDatabase/writeData";
+import { Chore } from "./realtimeDatabase/model/chores";
 
 const ShowChores = () => {
   const chores = useChores();
@@ -12,6 +14,9 @@ const ShowChores = () => {
       chores && chores.sort((c1, c2) => c1.dueDate.localeCompare(c2.dueDate)),
     [chores],
   );
+  const updateChoreCompleted =
+    (chore: Chore) => (e: ChangeEvent<HTMLInputElement>) =>
+      updateChore({ ...chore, completed: e.target.checked });
 
   if (!orderedChores) return <Loading />;
 
@@ -25,6 +30,14 @@ const ShowChores = () => {
             <Card.Text>
               {new Date(chore.dueDate).toLocaleString("en-GB")}
             </Card.Text>
+            <Form.Check>
+              <Form.Check.Input
+                type="checkbox"
+                checked={chore.completed ?? false}
+                onChange={updateChoreCompleted(chore)}
+              ></Form.Check.Input>
+              <Form.Check.Label>Done?</Form.Check.Label>
+            </Form.Check>
           </Card.Body>
         </Card>
       ))}
