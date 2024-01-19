@@ -7,9 +7,8 @@ import reportWebVitals from "./reportWebVitals";
 import { initializeApp } from "firebase/app";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ShowChores from "./ShowChores";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
+// https://firebase.google.com/docs/web/setup#available-libraries
 const firebaseConfig = {
   apiKey: "AIzaSyAVUbe_6Qt5FLXp5Q8leXi9OYAeVv0BoVU",
   authDomain: "chores-app-a1ca8.firebaseapp.com",

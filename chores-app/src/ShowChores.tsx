@@ -1,38 +1,29 @@
-import { get, getDatabase, query, ref } from "firebase/database";
-import { useEffect, useState } from "react";
 import "./AddChore.css";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
-type Chores = {
-  [choreId: string]: Chore;
-};
-
-type Chore = {
-  name: string;
-  dueDate: string;
-};
+import { useChores } from "./realtimeDatabase/useRealtimeArray";
+import Loading from "./common/Loading";
+import { useMemo } from "react";
 
 const ShowChores = () => {
-  const [chores, setChores] = useState<Chores>({});
-  useEffect(() => {
-    const getChores = async () => {
-      const db = getDatabase();
-      const snapshot = await get(query(ref(db, "chores")));
-      setChores(snapshot.exists() ? snapshot.val() : {});
-    };
-    getChores();
-  }, []);
-  console.log(chores);
+  const chores = useChores();
+  const orderedChores = useMemo(
+    () =>
+      chores && chores.sort((c1, c2) => c1.dueDate.localeCompare(c2.dueDate)),
+    [chores],
+  );
+
+  if (!orderedChores) return <Loading />;
+
   return (
     <div className="App">
       <Link to="/add">Add new chore</Link>
-      {Object.keys(chores).map((choreId) => (
-        <Card>
+      {orderedChores.map((chore) => (
+        <Card key={chore.id}>
           <Card.Body>
-            <Card.Title>{chores[choreId].name}</Card.Title>
+            <Card.Title>{chore.name}</Card.Title>
             <Card.Text>
-              {new Date(chores[choreId].dueDate).toLocaleString()}
+              {new Date(chore.dueDate).toLocaleString("en-GB")}
             </Card.Text>
           </Card.Body>
         </Card>

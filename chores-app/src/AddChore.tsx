@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./AddChore.css";
 import { Button, Form } from "react-bootstrap";
-import {
-  child,
-  get,
-  getDatabase,
-  push,
-  query,
-  ref,
-  update,
-} from "firebase/database";
 import { Link } from "react-router-dom";
+import { addChore } from "./realtimeDatabase/writeData";
 
 const convertToDateTimeLocalString = (date: Date) => {
   const year = date.getFullYear();
@@ -28,28 +20,15 @@ const todayAtTenPM = () => {
   return output;
 };
 
-const addChore = async (name: string, dueDate: Date) => {
-  const db = getDatabase();
-
-  const chore = {
-    name,
-    dueDate,
-    createdAt: new Date(),
-  };
-
-  const newChoreKey = push(child(ref(db), "chores")).key;
-  const newChoreResource = `chores/${newChoreKey}`;
-
-  const updates = { [newChoreResource]: chore };
-  await update(ref(db), updates);
-};
-
 const AddChore = () => {
+  const [saving, setSaving] = useState(false);
   const [name, setName] = useState("");
   const [dueDate, setDueDate] = useState(todayAtTenPM());
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    setSaving(true);
     e.preventDefault();
     addChore(name, dueDate);
+    setSaving(false);
   };
   return (
     <div className="App">
@@ -71,7 +50,7 @@ const AddChore = () => {
             onChange={(e) => setDueDate(new Date(e.target.value))}
           ></Form.Control>
         </Form.Group>
-        <Button type="submit">Save</Button>
+        <Button type="submit">{saving ? "Saving" : "Save"}</Button>
       </Form>
     </div>
   );
