@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import AddChore from "./AddChore";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { initializeApp } from "firebase/app";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ShowChores from "./ShowChores";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,6 +17,8 @@ const firebaseConfig = {
   storageBucket: "chores-app-a1ca8.appspot.com",
   messagingSenderId: "860916980116",
   appId: "1:860916980116:web:00a8cce2394f7269151781",
+  databaseURL:
+    "https://chores-app-a1ca8-default-rtdb.europe-west1.firebasedatabase.app",
 };
 
 initializeApp(firebaseConfig);
@@ -26,7 +29,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Routes>
+        <Route path="/" element={<ShowChores />} />
+        <Route path="/add" element={<AddChore />} />
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>,
 );

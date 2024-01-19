@@ -2,7 +2,7 @@ type Action = {};
 type Task = {};
 type Search = {};
 
-class ChoresEngine {
+export class ChoresEngine {
   constructor(events: Action[]) {
     for (var event of events) {
       this.addEvent(event);
