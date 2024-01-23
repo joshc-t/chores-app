@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./AddChore.css";
+import "../Page.css";
 import { Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { addChore } from "./realtimeDatabase/writeData";
+import { addChore } from "../../realtimeDatabase/writeData";
 
 const convertToDateTimeLocalString = (date: Date) => {
   const year = date.getFullYear();
@@ -31,7 +31,7 @@ const AddChore = () => {
     setSaving(false);
   };
   return (
-    <div className="App">
+    <div className="Page">
       <Link to="/">View to-do list</Link>
       <Form onSubmit={onSubmit}>
         <Form.Group>

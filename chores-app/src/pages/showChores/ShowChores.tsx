@@ -1,11 +1,11 @@
-import "./AddChore.css";
+import "../Page.css";
 import { Card, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useChores } from "./realtimeDatabase/useRealtimeArray";
-import Loading from "./common/Loading";
+import { useChores } from "../../realtimeDatabase/useRealtimeArray";
+import Loading from "../../common/Loading";
 import { ChangeEvent, useMemo } from "react";
-import { updateChore } from "./realtimeDatabase/writeData";
-import { Chore } from "./realtimeDatabase/model/chores";
+import { updateChore } from "../../realtimeDatabase/writeData";
+import { Chore } from "../../realtimeDatabase/model/chores";
 
 const ShowChores = () => {
   const chores = useChores();
@@ -21,7 +21,7 @@ const ShowChores = () => {
   if (!orderedChores) return <Loading />;
 
   return (
-    <div className="App">
+    <div className="Page">
       <Link to="/add">Add new chore</Link>
       {orderedChores.map((chore) => (
         <Card key={chore.id}>

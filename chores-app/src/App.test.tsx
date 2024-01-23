@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import AddChore from "./AddChore";
+import AddChore from "./pages/addChore/AddChore";
 
 test("renders learn react link", () => {
   render(<AddChore />);

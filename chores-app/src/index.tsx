@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import AddChore from "./AddChore";
+import AddChore from "./pages/addChore/AddChore";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { initializeApp } from "firebase/app";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ShowChores from "./ShowChores";
+import ShowChores from "./pages/showChores/ShowChores";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 const firebaseConfig = {
