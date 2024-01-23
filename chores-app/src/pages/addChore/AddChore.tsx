@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../Page.css";
 import { Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addChore } from "../../realtimeDatabase/writeData";
 
 const convertToDateTimeLocalString = (date: Date) => {
@@ -21,6 +21,7 @@ const todayAtTenPM = () => {
 };
 
 const AddChore = () => {
+  const navigate = useNavigate();
   const [saving, setSaving] = useState(false);
   const [name, setName] = useState("");
   const [dueDate, setDueDate] = useState(todayAtTenPM());
@@ -29,6 +30,7 @@ const AddChore = () => {
     e.preventDefault();
     addChore(name, dueDate);
     setSaving(false);
+    navigate("/");
   };
   return (
     <div className="Page">
@@ -50,7 +52,9 @@ const AddChore = () => {
             onChange={(e) => setDueDate(new Date(e.target.value))}
           ></Form.Control>
         </Form.Group>
-        <Button type="submit">{saving ? "Saving" : "Save"}</Button>
+        <Button type="submit" disabled={saving}>
+          {saving ? "Saving" : "Save"}
+        </Button>
       </Form>
     </div>
   );
