@@ -1,4 +1,4 @@
-import { child, getDatabase, push, ref, set } from "firebase/database";
+import { child, getDatabase, push, ref, remove, set } from "firebase/database";
 import { Chore } from "./model/chores";
 
 const addObject = <T>(path: string, data: T) => {
@@ -11,6 +11,11 @@ const addObject = <T>(path: string, data: T) => {
 const updateObject = <T>(path: string, data: T) => {
   const db = getDatabase();
   set(ref(db, path), data);
+};
+
+const removeObject = (path: string) => {
+  const db = getDatabase();
+  remove(ref(db, path));
 };
 
 export const addChore = (name: string, dueDate: Date) =>
@@ -29,4 +34,8 @@ export const updateChore = (chore: Chore) => {
     completed: chore.completed,
   };
   updateObject(`chores/${chore.id}`, update);
+};
+
+export const removeChore = (chore: Chore) => {
+  removeObject(`chores/${chore.id}`);
 };

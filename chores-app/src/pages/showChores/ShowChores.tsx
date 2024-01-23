@@ -1,11 +1,12 @@
 import "../Page.css";
-import { Card, Form } from "react-bootstrap";
+import { Button, ButtonGroup, Card, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useChores } from "../../realtimeDatabase/useRealtimeArray";
 import Loading from "../../common/Loading";
 import { ChangeEvent, useMemo } from "react";
-import { updateChore } from "../../realtimeDatabase/writeData";
+import { removeChore, updateChore } from "../../realtimeDatabase/writeData";
 import { Chore } from "../../realtimeDatabase/model/chores";
+import { BsPencilSquare, BsTrash } from "react-icons/bs";
 
 const ShowChores = () => {
   const chores = useChores();
@@ -17,6 +18,9 @@ const ShowChores = () => {
   const updateChoreCompleted =
     (chore: Chore) => (e: ChangeEvent<HTMLInputElement>) =>
       updateChore({ ...chore, completed: e.target.checked });
+  const deleteChore = (chore: Chore) => () => {
+    removeChore(chore);
+  };
 
   if (!orderedChores) return <Loading />;
 
@@ -30,6 +34,14 @@ const ShowChores = () => {
             <Card.Text>
               {new Date(chore.dueDate).toLocaleString("en-GB")}
             </Card.Text>
+            <ButtonGroup>
+              <Button>
+                <BsPencilSquare />
+              </Button>
+              <Button variant="danger" onClick={deleteChore(chore)}>
+                <BsTrash />
+              </Button>
+            </ButtonGroup>
             <Form.Check>
               <Form.Check.Input
                 type="checkbox"
