@@ -31,7 +31,7 @@ export const updateChore = (chore: Chore) => {
     name: chore.name,
     dueDate: chore.dueDate,
     createdAt: chore.createdAt,
-    completed: chore.completed,
+    completed: chore.completed ?? false,
   };
   updateObject(`chores/${chore.id}`, update);
 };

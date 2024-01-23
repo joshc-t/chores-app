@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import AddChore from "./pages/addChore/AddChore";
+import { AddChore, EditChore } from "./pages/addChore/AddChore";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { initializeApp } from "firebase/app";
@@ -31,6 +31,7 @@ root.render(
       <Routes>
         <Route path="/" element={<ShowChores />} />
         <Route path="/add" element={<AddChore />} />
+        <Route path="/edit/:choreId" element={<EditChore />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

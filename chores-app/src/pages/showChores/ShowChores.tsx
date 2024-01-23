@@ -1,6 +1,6 @@
 import "../Page.css";
 import { Button, ButtonGroup, Card, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useChores } from "../../realtimeDatabase/useRealtimeArray";
 import Loading from "../../common/Loading";
 import { ChangeEvent, useMemo } from "react";
@@ -9,6 +9,7 @@ import { Chore } from "../../realtimeDatabase/model/chores";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
 
 const ShowChores = () => {
+  const navigate = useNavigate();
   const chores = useChores();
   const orderedChores = useMemo(
     () =>
@@ -20,6 +21,9 @@ const ShowChores = () => {
       updateChore({ ...chore, completed: e.target.checked });
   const deleteChore = (chore: Chore) => () => {
     removeChore(chore);
+  };
+  const editChore = (chore: Chore) => () => {
+    navigate(`/edit/${chore.id}`);
   };
 
   if (!orderedChores) return <Loading />;
@@ -35,7 +39,7 @@ const ShowChores = () => {
               {new Date(chore.dueDate).toLocaleString("en-GB")}
             </Card.Text>
             <ButtonGroup>
-              <Button>
+              <Button onClick={editChore(chore)}>
                 <BsPencilSquare />
               </Button>
               <Button variant="danger" onClick={deleteChore(chore)}>
